@@ -1,0 +1,28 @@
+{
+  "name": "pomopy",
+  "version": "1.0.0",
+  "description": "Interdisciplinary project of the 4th period of the Bachelor of Computer Science course at IFSULDEMINAS Campus Muzambinho",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/12161003677/pomopy.git"
+  },
+  "keywords": [
+    "python",
+    "flask",
+    "tailwindcss",
+    "pomodoro"
+  ],
+  "author": "Eliezer Alves",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/12161003677/pomopy/issues"
+  },
+  "homepage": "https://github.com/12161003677/pomopy#readme",
+  "dependencies": {
+    "tailwindcss": "^2.2.16"
+  }
+}
