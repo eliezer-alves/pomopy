@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn-pomo-1{
+    @apply w-full focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg
+}
+.input-pomo-1{
+    @apply w-full rounded-md px-4 py-2
+}
