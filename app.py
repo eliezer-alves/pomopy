@@ -37,6 +37,11 @@ def login():
     callback_url = request.args.get('callback_url') or ""
     return render_template("login.html", callback_url=callback_url)
 
+# _______________________________________________________________________________________
+@app.route("/register")
+def register():
+    return render_template("register.html")
+
 
 # _______________________________________________________________________________________
 @app.route("/auth", methods=['POST'])
