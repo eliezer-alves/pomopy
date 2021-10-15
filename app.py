@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, redirect, session, flash
 
+from app.Controllers import LoginController, RegisterController
 
 app = Flask(__name__)
 app.secret_key = 'LP2'
-# import routes
 
 class Usuario:
     def __init__(self, username, nome, password):
@@ -34,13 +34,12 @@ def index():
 # _______________________________________________________________________________________
 @app.route("/login")
 def login():
-    callback_url = request.args.get('callback_url') or ""
-    return render_template("login.html", callback_url=callback_url)
+    return LoginController().create()
 
 # _______________________________________________________________________________________
 @app.route("/register")
 def register():
-    return render_template("register.html")
+    return RegisterController().create()
 
 
 # _______________________________________________________________________________________
