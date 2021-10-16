@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, redirect, session, flash
 
-from app.Controllers import LoginController, RegisterController
+from app.Controllers import LoginController, RegisterController, DashboardController
 
 app = Flask(__name__)
 app.secret_key = 'LP2'
+
+teste = 19
 
 class Usuario:
     def __init__(self, username, nome, password):
@@ -28,7 +30,7 @@ def index():
     if not session_valid():
         return redirect('/login?callback_url=')
 
-    return render_template("index.html")
+    return DashboardController().index()
 
 
 # _______________________________________________________________________________________
@@ -36,35 +38,29 @@ def index():
 def login():
     return LoginController().create()
 
+
+# _______________________________________________________________________________________
+@app.route("/logout")
+def logout():
+    return LoginController().destroy()
+
+
 # _______________________________________________________________________________________
 @app.route("/register")
 def register():
     return RegisterController().create()
 
+# _______________________________________________________________________________________
+@app.route("/user/store", methods=['POST'])
+def store():
+    return RegisterController().store()
+
 
 # _______________________________________________________________________________________
 @app.route("/auth", methods=['POST'])
 def auth():
-
-    if request.form['username'] in usuarios:
-        if usuarios[request.form['username']]._password == request.form['password']:
-            session['user_logged'] = request.form['username']
-            flash(request.form['username'] + ' logou com sucesso!')
-            next_page = request.form['callback_url']
-            return redirect("/{}".format(next_page))
+    return LoginController().store()
     
-    flash('Falha ao realizar login para ' + request.form['username'] + '!')
-    return redirect('/login')
-
-
-# _______________________________________________________________________________________
-@app.route("/logout")
-def logout():
-
-    session['user_logged'] = None
-    flash('Sessão finalizada!')
-    
-    return redirect('/login')
 
 
 
