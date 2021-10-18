@@ -19,6 +19,6 @@ class RegisterController(Controller):
             'password': self._request.form['password']
         }
 
-        self._usuario.create(attributes)
+        print(self._usuario.create(attributes))
 
-        return self._usuario.query
+        return self._usuario.lastExecutedQuery

@@ -38,6 +38,10 @@ def index():
 def login():
     return LoginController().create()
 
+# _______________________________________________________________________________________
+@app.route("/auth", methods=['POST'])
+def auth():
+    return LoginController().autenticate()
 
 # _______________________________________________________________________________________
 @app.route("/logout")
@@ -55,11 +59,6 @@ def register():
 def store():
     return RegisterController().store()
 
-
-# _______________________________________________________________________________________
-@app.route("/auth", methods=['POST'])
-def auth():
-    return LoginController().store()
     
 
 
