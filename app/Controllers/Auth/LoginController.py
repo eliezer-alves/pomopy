@@ -22,11 +22,11 @@ class LoginController(Controller):
             next_page = self._request.form['callback_url']
             return self._redirect("/{}".format(next_page))
     
-        self._flash('Falha ao realizar login para ' + self._request.form['username'] + '!')
+        self._flash('Failed to perform login for ' + self._request.form['username'] + '!')
         return self._redirect('/login')
     
     def destroy(self):
         self._session['user_logged'] = None
-        self._flash('Sessão finalizada!')
+        self._flash('Session ended!')
         
         return self._redirect('/login')

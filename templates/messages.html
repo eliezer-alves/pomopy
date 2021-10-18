@@ -1,0 +1,12 @@
+{% macro render_messages() %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="bg-blue-100 border border-blue-400 text-gray-700 px-4 py-3 rounded relative" role="alert">
+    <strong class="font-bold">System message!</strong>
+    <span class="block sm:inline">{{ message }}</span>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% endmacro %}
