@@ -61,9 +61,16 @@ class Model:
     
     def where(self, clause, value = None, operator = '='):
         if(value != None):
-            self.query += ' WHERE {} {} {}'.format(clause, operator, value)
+            self.query += ' WHERE {} {} \'{}\''.format(clause, operator, value)
         else:    
             self.query += ' WHERE {}'.format(clause)        
+        return self
+
+    def andWhere(self, clause, value = None, operator = '='):
+        if(value != None):
+            self.query += ' AND {} {} \'{}\''.format(clause, operator, value)
+        else:    
+            self.query += ' AND {}'.format(clause)        
         return self
     
     def get(self):
