@@ -1,6 +1,5 @@
 from app.Controllers import Controller
 from app.Models import Usuario
-import sys
 
 
 
@@ -19,6 +18,9 @@ class RegisterController(Controller):
             'password': self._request.form['password']
         }
 
-        print(self._usuario.create(attributes))
+        if not self._usuario.create(attributes)['id']:
+            self._flash('Falha ao realizar o cadastro!')
+            self._redirect('/register')
 
-        return self._usuario.lastExecutedQuery
+        self._flash('Cadastro realizado com sucesso!')
+        return self._redirect('/login')

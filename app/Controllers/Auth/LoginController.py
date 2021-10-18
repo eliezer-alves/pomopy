@@ -28,4 +28,4 @@ class LoginController(Controller):
         self.session['user_logged'] = None
         self.flash('Sessão finalizada!')
         
-        return self.redirect('/login')
+        return self._redirect('/login')

@@ -39,23 +39,17 @@ class Model:
             self.columnsSelect = columns.split(',')
 
         return self.columnsSelect
-    
-    def makeOneResgisterWithBaseData(self, register):
-        result = []
-        for i, v in enumerate(register):
-                result.append((self.columnsSelect[i], v))
-        return result
 
     def hydrateWithBaseData(self, baseData) -> None:
         self.attributes = []
         print(len(baseData), baseData)
         
         if len(baseData) == 1:
-            self.attributes = self.makeOneResgisterWithBaseData(baseData[0])
+            self.attributes = dict(zip(self.columnsSelect, baseData[0]))
         
         else:
             for register in enumerate(baseData):
-                self.attributes.append(self.makeOneResgisterWithBaseData(register))
+                self.attributes.append(dict(zip(self.columnsSelect, register)))
 
     def curdate(self):
         self.__cursor.execute("SELECT CURDATE();")
