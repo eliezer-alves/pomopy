@@ -12,6 +12,10 @@ class RegisterController(Controller):
         return self._render_template("register.html")
     
     def store(self):
+        if self._request.form['password'] != self._request.form['check_password']:
+            self._flash('Failed to register: passwords do not match!')
+            return self._redirect('/register')
+
         attributes = {
             'name': self._request.form['name'],
             'username': self._request.form['username'],
@@ -19,8 +23,8 @@ class RegisterController(Controller):
         }
 
         if not self._usuario.create(attributes)['id']:
-            self._flash('Falha ao realizar o cadastro!')
+            self._flash('Failed to register!')
             self._redirect('/register')
 
-        self._flash('Cadastro realizado com sucesso!')
+        self._flash('Registration performed successfully!')
         return self._redirect('/login')

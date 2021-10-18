@@ -21,6 +21,15 @@
       </div>
 
       <div class="w-full sm:w-2/3 md:w-1/2 p-10 grid grid-cols-1 space-y-4">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul id="messages" class="list-unstyled">
+                {% for message in messages %}
+                    <li class="alert alert-success">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
         <span class="font-bold text-2xl">Sign up and create your account</span>
         <form method="POST" action="/user/store" class="space-y-4">
           <div class="grid grid-cols-1 gap-4">

@@ -26,8 +26,7 @@ class LoginController(Controller):
         return self._redirect('/login')
     
     def destroy(self):
-        self.session['user_logged'] = None
-        self.flash('Sessão finalizada!')
+        self._session['user_logged'] = None
+        self._flash('Sessão finalizada!')
         
         return self._redirect('/login')
-        
