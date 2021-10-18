@@ -1,4 +1,4 @@
-# from flask_mysqldb import 
+from six import string_types
 import MySQLdb
 
 SQL_FIND = ''
@@ -13,38 +13,71 @@ class Model:
         self.primaryKey = 'id'
         self.fillable = []
         self.attributes = []
+        self.columnsSelect = self.fillable
 
     def resetQuery(self) -> None:
         self.lastExecutedQuery = self.query
         self.query = ''
+    
+    def getColumns(self):
+        return ', '.join(self.attributes.keys())
+    
+    def getValues(self):
+        values = '\', \''.join(self.attributes.values())
+        values = "'" + values + "'"
+        return values
+    
+    def getColumnsSelect(self, columns):
+        if columns == None:
+            self.columnsSelect = self.fillable        
+            self.columnsSelect.append(self.primaryKey)
+
+        elif isinstance(columns, list):
+            self.columnsSelect = columns
+        
+        elif isinstance(columns, string_types):
+            self.columnsSelect = columns.split(',')
+
+        return self.columnsSelect
+    
+    def makeOneResgisterWithBaseData(self, register):
+        result = []
+        for i, v in enumerate(register):
+                result.append((self.columnsSelect[i], v))
+        return result
+
+    def hydrateWithBaseData(self, baseData) -> None:
+        self.attributes = []
+        print(len(baseData), baseData)
+        
+        if len(baseData) == 1:
+            self.attributes = self.makeOneResgisterWithBaseData(baseData[0])
+        
+        else:
+            for register in enumerate(baseData):
+                self.attributes.append(self.makeOneResgisterWithBaseData(register))
 
     def curdate(self):
         self.__cursor.execute("SELECT CURDATE();")
         return self.__cursor.fetchall()
 
-    def select(self, columns = '*'):
-        if isinstance(columns, list):
-            columns = ', '.join(columns)                        
-        self.query += ' SELECT {} FROM {}'.format(columns, self.table)
-
+    def select(self, columns = None):
+        self.query += ' SELECT {} FROM {}'.format(', '.join(self.getColumnsSelect(columns)), self.table)
         return self
     
     def where(self, clause, value = None, operator = '='):
         if(value != None):
             self.query += ' WHERE {} {} {}'.format(clause, operator, value)
         else:    
-            self.query += ' WHERE {}'.format(clause)
-        
+            self.query += ' WHERE {}'.format(clause)        
         return self
     
     def get(self):
         self.__cursor.execute(self.query)
         self.resetQuery()
         result_set = self.__cursor.fetchall()
-        for row in result_set:
-            print(row)
-        
-        return self.__cursor.fetchall()
+        self.hydrateWithBaseData(result_set)
+        return self.attributes
     
     def find(self, id):
         return self.select().where(self.primaryKey, id).get()
@@ -55,14 +88,4 @@ class Model:
         self.__cursor.execute(self.query)
         self.__db.commit()
         self.resetQuery()
-        
         return self.find(self.__cursor.lastrowid)
-
-    def getColumns(self):
-        return ', '.join(self.attributes.keys())
-    
-    def getValues(self):
-        values = '\', \''.join(self.attributes.values())
-        values = "'" + values + "'"
-
-        return values
