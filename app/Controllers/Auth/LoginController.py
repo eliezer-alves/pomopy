@@ -1,11 +1,11 @@
 from app.Controllers import Controller
-from app.Models import Usuario
+from app.Models import User
 
 
 class LoginController(Controller):
     def __init__(self) -> None:
         super().__init__()
-        self._usuario = Usuario()
+        self._usuario = User()
 
     def create(self):
         callback_url = self._request.args.get('callback_url') or ""

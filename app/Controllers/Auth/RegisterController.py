@@ -1,12 +1,12 @@
 from app.Controllers import Controller
-from app.Models import Usuario
+from app.Models import User
 
 
 
 class RegisterController(Controller):
     def __init__(self) -> None:
         super().__init__()
-        self._usuario = Usuario()
+        self._usuario = User()
 
     def create(self):
         return self._render_template("register.html")

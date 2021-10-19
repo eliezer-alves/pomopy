@@ -1,6 +1,6 @@
 from app.Models import Model
 
-class Usuario(Model):
+class User(Model):
     def __init__(self) -> None:
         super().__init__()
         self.table = 'users'
