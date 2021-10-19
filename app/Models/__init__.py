@@ -1,2 +1,3 @@
 from .Model import Model
-from .Usuario import Usuario
+from .User import User
+from .Task import Task

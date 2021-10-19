@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, flash
 
-from app.Controllers import LoginController, RegisterController, DashboardController
+from app.Controllers import LoginController, RegisterController, DashboardController, TasksController
 
 app = Flask(__name__)
 app.secret_key = 'LP2'
@@ -49,15 +49,33 @@ def logout():
     return LoginController().destroy()
 
 
-# _______________________________________________________________________________________
+# USER___________________________________________________________________________________
 @app.route("/register")
 def register():
     return RegisterController().create()
 
-# _______________________________________________________________________________________
 @app.route("/user/store", methods=['POST'])
-def store():
+def storeUser():
     return RegisterController().store()
+
+
+# TASKS__________________________________________________________________________________
+@app.route("/tasks")
+def tasks():
+    if not session_valid():
+        return redirect('/login?callback_url=tasks')
+    return TasksController().index()
+
+
+@app.route("/tasks/create")
+def createTask():
+    if not session_valid():
+        return redirect('/login?callback_url=tasks')
+    return TasksController().create()
+
+@app.route("/tasks/store", methods=['POST'])
+def storeTask():
+    return TasksController().store()
 
     
 

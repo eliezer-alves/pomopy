@@ -40,15 +40,13 @@ class Model:
 
         return self.columnsSelect
 
-    def hydrateWithBaseData(self, baseData) -> None:
+    def hydrateWithBaseData(self, baseData, simplify = True) -> None:
         self.attributes = []
-        print(len(baseData), baseData)
-        
-        if len(baseData) == 1:
+        if len(baseData) == 1 and simplify:
             self.attributes = dict(zip(self.columnsSelect, baseData[0]))
         
         else:
-            for register in enumerate(baseData):
+            for i, register in enumerate(baseData):
                 self.attributes.append(dict(zip(self.columnsSelect, register)))
 
     def curdate(self):
@@ -83,8 +81,17 @@ class Model:
     def find(self, id):
         return self.select().where(self.primaryKey, id).get()
     
+    def all(self):
+        self.select()
+        self.__cursor.execute(self.query)
+        self.resetQuery()
+        result_set = self.__cursor.fetchall()
+        self.hydrateWithBaseData(result_set, False)
+        return self.attributes
+
+    
     def create(self, attributes):
-        self.attributes = attributes        
+        self.attributes = attributes
         self.query = ' INSERT INTO {} ({}) VALUES ({})'.format(self.table, self.getColumns(), self.getValues())
         self.__cursor.execute(self.query)
         self.__db.commit()

@@ -20,12 +20,11 @@ criar_tabelas = '''
     
     CREATE TABLE `tasks` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
-      `id_user` int(11) NOT NULL,
+      `user_id` int(11) NOT NULL,
       `name` varchar(60) NOT NULL,
-      `username` varchar(20) NOT NULL,
-      `password` varchar(20) NOT NULL,
+      `description` varchar(255) NOT NULL,
       PRIMARY KEY (`id`),
-      FOREIGN KEY (`id_user`) REFERENCES users(`id`)
+      FOREIGN KEY (`user_id`) REFERENCES users(`id`)
     ) ENGINE=InnoDB;
     '''
 
