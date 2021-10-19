@@ -24,5 +24,4 @@ class TasksController(Controller):
             self._flash('Failed to register!')
             self._redirect('/tasks/create')
 
-        self._flash('Registration performed successfully!')
         return self._redirect('/tasks')
