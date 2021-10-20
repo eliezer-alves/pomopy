@@ -14,7 +14,9 @@ class LoginController(Controller):
     def autenticate(self):
         username = self._request.form['username']
         password = self._request.form['password']
+
         authUser = self._usuario.select().where('username', username).andWhere('password', password).get()
+        
         print(authUser)
         if 'id' in authUser:
             self._session['user_logged'] = self._request.form['username']
