@@ -1,12 +1,12 @@
 from app.Controllers import Controller
-from app.Models import User
+from app.Models import Users
 
 
 
 class RegisterController(Controller):
     def __init__(self) -> None:
         super().__init__()
-        self._usuario = User()
+        self._users = Users()
 
     def create(self):
         return self._render_template("register.html")
@@ -18,11 +18,12 @@ class RegisterController(Controller):
 
         attributes = {
             'name': self._request.form['name'],
+            'email': self._request.form['email'],
             'username': self._request.form['username'],
-            'password': self._request.form['password']
+            'password': self._request.form['password'],
         }
 
-        if not self._usuario.create(attributes)['id']:
+        if not self._users.create(attributes)['id']:
             self._flash('Failed to register!')
             self._redirect('/register')
 

@@ -1,11 +1,11 @@
 from app.Controllers import Controller
-from app.Models import User
+from app.Models import Users
 
 
 class LoginController(Controller):
     def __init__(self) -> None:
         super().__init__()
-        self._usuario = User()
+        self._users = Users()
 
     def create(self):
         callback_url = self._request.args.get('callback_url') or ""
@@ -15,7 +15,7 @@ class LoginController(Controller):
         username = self._request.form['username']
         password = self._request.form['password']
 
-        authUser = self._usuario.select().where('username', username).andWhere('password', password).get()
+        authUser = self._users.select().where('username', username).andWhere('password', password).get()
         
         print(authUser)
         if 'id' in authUser:

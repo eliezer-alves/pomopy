@@ -1,3 +1,3 @@
 from .Model import Model
-from .User import User
-from .Task import Task
+from .Users import Users
+from .Tasks import Tasks
