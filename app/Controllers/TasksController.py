@@ -1,14 +1,14 @@
 from app.Controllers import Controller
-from app.Models import Task
+from app.Models import Tasks
 
 
 class TasksController(Controller):
     def __init__(self) -> None:
         super().__init__()
-        self._task = Task()
+        self._tasks = Tasks()
 
     def index(self):
-        tasks = self._task.all()
+        tasks = self._tasks.all()
         return self._render_template("tasks.html", tasks = tasks)
 
     def create(self):
@@ -20,7 +20,7 @@ class TasksController(Controller):
             'description': self._request.form['description'],
             'user_id': str(68)
         }
-        if not self._task.create(attributes)['id']:
+        if not self._tasks.create(attributes)['id']:
             self._flash('Failed to register!')
             self._redirect('/tasks/create')
 
