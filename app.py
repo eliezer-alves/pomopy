@@ -19,7 +19,7 @@ usuarios = {
 }
 
 def session_valid():
-    if 'user_logged' not in session or session['user_logged'] == None:
+    if 'user' not in session or session['user'] == None:
         return False
     return True
 

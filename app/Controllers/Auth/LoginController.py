@@ -17,9 +17,8 @@ class LoginController(Controller):
 
         authUser = self._users.select().where('username', username).andWhere('password', password).get()
         
-        print(authUser)
         if 'id' in authUser:
-            self._session['user_logged'] = self._request.form['username']
+            self._session['user'] = authUser
             self._flash(self._request.form['username'] + ' logou com sucesso!')
             next_page = self._request.form['callback_url']
             return self._redirect("/{}".format(next_page))
@@ -28,7 +27,7 @@ class LoginController(Controller):
         return self._redirect('/login')
     
     def destroy(self):
-        self._session['user_logged'] = None
+        self._session['user'] = None
         self._flash('Session ended!')
         
         return self._redirect('/login')
