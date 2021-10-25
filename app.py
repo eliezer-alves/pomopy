@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, flash
 
-from app.Controllers import LoginController, RegisterController, DashboardController, TasksController
+from app.Controllers import LoginController, RegisterController, DashboardController, TasksController, TagsController
 
 app = Flask(__name__)
 app.secret_key = 'LP2'
@@ -77,6 +77,23 @@ def createTask():
 def storeTask():
     return TasksController().store()
 
+# TAGS__________________________________________________________________________________
+@app.route("/tags")
+def tags():
+    if not session_valid():
+        return redirect('/login?callback_url=tags')
+    return TagsController().index()
+
+
+@app.route("/tags/create")
+def createTag():
+    if not session_valid():
+        return redirect('/login?callback_url=tags')
+    return TagsController().create()
+
+@app.route("/tags/store", methods=['POST'])
+def storeTag():
+    return TagsController().store()
     
 
 

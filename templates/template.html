@@ -9,31 +9,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beans Love Beers</title>
+  <title>Eli | PomoPy</title>
   <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
 </head>
 
 <body>
   <div class="w-full h-screen p-4 flex justify-center items-center bg-gray-800">
-    <main class="w-full md:w-5/6 xl:w-4/6 h-9/10 flex-col bg-gray-300 rounded-lg font-mono">
+    <div class="w-full md:w-5/6 xl:w-4/6 h-9/10 flex-col bg-gray-300 rounded-lg font-mono">
 
-        <nav class="flex w-full flex justify-between items-center px-6 h-16 bg-indigo-50 rounded-lg text-gray-700 border-b border-gray-200">
-            <div class="flex w-1/2 md:w-1/3 items-center justify-between">
-              <a href="/">Dashboard</a>
-              <a href="/pomodoro">Pomodoro</a>
-              <a href="/tasks">Tasks</a>              
-            </div>
-            <a href="logout" class="w-200">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-              </svg>
-            </a>
-        </nav>
+      <nav
+        class="flex w-full flex justify-between items-center px-6 h-16 bg-indigo-50 rounded-lg text-gray-700 border-b border-gray-200">
+        <div class="flex w-1/2 md:w-1/3 items-center justify-between">
+          <a href="/">Dashboard</a>
+          <a href="/pomodoro">Pomodoro</a>
+          <a href="/tasks">Tasks</a>
+          <a href="/tags">Tags</a>
+        </div>
+        <a href="logout" class="w-200">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+        </a>
+      </nav>
 
-      {% block view %} {% endblock %}
-    </main>
+      <main class="w-full flex items-center">
+        {% block view %} {% endblock %}
+      </main>
+    </div>
   </div>
 </body>
 

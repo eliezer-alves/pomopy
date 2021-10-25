@@ -7,6 +7,7 @@ class Model:
     def __init__(self) -> None:
         self.__db = MySQLdb.connect(host="127.0.0.1", user="root", passwd="admin", db="pomopy", port=3306)
         self.__cursor = self.__db.cursor()
+        self.__first = False
         self.query = ''
         self.lastExecutedQuery = ''
         self.table = ''
@@ -23,7 +24,7 @@ class Model:
         return ', '.join(self.attributes.keys())
     
     def getValues(self):
-        values = '\', \''.join(self.attributes.values())
+        values = '\', \''.join(str(e) for e in self.attributes.values())
         values = "'" + values + "'"
         return values
     
@@ -40,7 +41,7 @@ class Model:
 
         return self.columnsSelect
 
-    def hydrateWithBaseData(self, baseData, simplify = True) -> None:
+    def hydrateWithBaseData(self, baseData, simplify = False) -> None:
         self.attributes = []
         if len(baseData) == 1 and simplify:
             self.attributes = dict(zip(self.columnsSelect, baseData[0]))
@@ -76,17 +77,25 @@ class Model:
         self.resetQuery()
         result_set = self.__cursor.fetchall()
         self.hydrateWithBaseData(result_set)
+        if(self.__first):
+            return self.attributes[0]
         return self.attributes
     
     def find(self, id):
+        self.first()
         return self.select().where(self.primaryKey, id).get()
+    
+    def first(self):
+        self.__first = True
+        return self
     
     def all(self):
         self.select()
         self.__cursor.execute(self.query)
         self.resetQuery()
         result_set = self.__cursor.fetchall()
-        self.hydrateWithBaseData(result_set, False)
+        print('->', result_set)
+        self.hydrateWithBaseData(result_set)
         return self.attributes
 
     

@@ -12,6 +12,10 @@ class RegisterController(Controller):
         return self._render_template("register.html")
     
     def store(self):
+        if self.existsUsername(self._request.form['username']):
+            self._flash('Failed to register: Username already exists!')
+            return self._redirect('/register')
+
         if self._request.form['password'] != self._request.form['check_password']:
             self._flash('Failed to register: passwords do not match!')
             return self._redirect('/register')
@@ -29,3 +33,10 @@ class RegisterController(Controller):
 
         self._flash('Registration performed successfully!')
         return self._redirect('/login')
+    
+    def existsUsername(self, username):
+        user = self._users.select().where('username', username).first().get()
+        if 'id' in user:
+            return True
+        
+        return False
