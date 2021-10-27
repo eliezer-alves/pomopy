@@ -5,7 +5,7 @@ SQL_FIND = ''
 
 class Model:
     def __init__(self) -> None:
-        self.__db = MySQLdb.connect(host="127.0.0.1", user="root", passwd="admin", db="pomopy", port=3306)
+        self.__db = MySQLdb.connect(host="127.0.0.1", user="root", passwd="admin", db="pomopy", port=3306, charset='utf8')
         self.__cursor = self.__db.cursor()
         self.__first = False
         self.query = ''
@@ -94,7 +94,6 @@ class Model:
         self.__cursor.execute(self.query)
         self.resetQuery()
         result_set = self.__cursor.fetchall()
-        print('->', result_set)
         self.hydrateWithBaseData(result_set)
         return self.attributes
 
@@ -106,3 +105,8 @@ class Model:
         self.__db.commit()
         self.resetQuery()
         return self.find(self.__cursor.lastrowid)
+    
+    def delete(self, id):
+        self.query = ' DELETE FROM {} WHERE {} = {}'.format(self.table, self.primaryKey, id)
+        self.__cursor.execute(self.query)
+        return self.__db.commit()

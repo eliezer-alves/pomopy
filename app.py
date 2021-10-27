@@ -77,6 +77,10 @@ def createTask():
 def storeTask():
     return TasksController().store()
 
+@app.route("/tasks/delete")
+def deleteTask():
+    return TasksController().delete()
+
 # TAGS__________________________________________________________________________________
 @app.route("/tags")
 def tags():
