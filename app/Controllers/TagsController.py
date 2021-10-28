@@ -35,11 +35,9 @@ class TagsController(Controller):
             'name': self._request.form['name'],
             'color': self._request.form['color'],
         }
-        # if not self._tags.update(attributes)['id']:
-        #     self._flash('Failed to edit!')
-        #     self._redirect('/tags/create')
-        self._tags.update(attributes)
-        print(self._tags)
+        if not self._tags.update(attributes)['id']:
+            self._flash('Failed to edit!')
+            self._redirect('/tags/edit/{}'.format(self._request.form['id']))
 
         return self._redirect('/tags')
     
