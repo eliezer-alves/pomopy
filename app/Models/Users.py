@@ -9,4 +9,5 @@ class Users(Model):
             'email',
             'username',
             'password',
+            'guilds_id',
         ]
