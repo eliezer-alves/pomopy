@@ -27,6 +27,13 @@ class Model:
         values = '\', \''.join(str(e) for e in self.attributes.values())
         values = "'" + values + "'"
         return values
+
+    def getSetQuery(self):
+        list = []
+        for i, value in enumerate(self.attributes.keys()):
+            if value != self.primaryKey:
+                list.append("{} = '{}'".format(value, [*self.attributes.values()][i]))        
+        return ', '.join(str(e) for e in list)
     
     def getColumnsSelect(self, columns):
         if columns == None:
@@ -106,7 +113,18 @@ class Model:
         self.resetQuery()
         return self.find(self.__cursor.lastrowid)
     
+    def update(self, attributes):
+        self.attributes = attributes
+        self.query = ' UPDATE {} SET {} WHERE {} = {}'.format(self.table, self.getSetQuery(), self.primaryKey, attributes[self.primaryKey])
+        self.__cursor.execute(self.query)
+        self.__db.commit()
+        self.resetQuery()
+        return self.attributes
+    
     def delete(self, id):
         self.query = ' DELETE FROM {} WHERE {} = {}'.format(self.table, self.primaryKey, id)
         self.__cursor.execute(self.query)
         return self.__db.commit()
+    
+    def __str__(self):
+        return f'\n\n### Model {self.__class__.__name__}:\n\n - table => {self.table}\n - primaryKey => {self.primaryKey}\n - columns => {self.fillable}\n - attributes => {self.attributes}\n - lastExecutedQuery => {self.lastExecutedQuery}\n\n'
