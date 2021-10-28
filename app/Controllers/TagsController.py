@@ -5,10 +5,10 @@ from app.Models import Tags
 class TagsController(Controller):
     def __init__(self) -> None:
         super().__init__()
-        self.tags = Tags()
+        self._tags = Tags()
 
     def index(self):
-        tags = self.tags.all()
+        tags = self._tags.all()
         return self._render_template("tags/index.html", tags = tags)
 
     def create(self):
@@ -19,8 +19,12 @@ class TagsController(Controller):
             'name': self._request.form['name'],
             'color': self._request.form['color'],
         }
-        if not self.tags.create(attributes)['id']:
+        if not self._tags.create(attributes)['id']:
             self._flash('Failed to register!')
             self._redirect('/tags/create')
 
+        return self._redirect('/tags')
+    
+    def delete(self, id):
+        self._tags.delete(id)
         return self._redirect('/tags')

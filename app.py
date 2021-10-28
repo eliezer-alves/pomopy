@@ -77,9 +77,9 @@ def createTask():
 def storeTask():
     return TasksController().store()
 
-@app.route("/tasks/delete")
-def deleteTask():
-    return TasksController().delete()
+@app.route("/tasks/delete/<int:id>")
+def deleteTask(id):
+    return TasksController().delete(id)
 
 # TAGS__________________________________________________________________________________
 @app.route("/tags")
@@ -98,8 +98,10 @@ def createTag():
 @app.route("/tags/store", methods=['POST'])
 def storeTag():
     return TagsController().store()
-    
 
+@app.route("/tags/delete/<int:id>")
+def deleteTag(id):
+    return TagsController().delete(id)
 
 
 if __name__ == '__main__':

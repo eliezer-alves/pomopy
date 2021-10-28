@@ -26,6 +26,6 @@ class TasksController(Controller):
 
         return self._redirect('/tasks')
     
-    def delete(self):
-        self._tasks.delete(self._request.args.get('id'))
+    def delete(self, id):
+        self._tasks.delete(id)
         return self._redirect('/tasks')
