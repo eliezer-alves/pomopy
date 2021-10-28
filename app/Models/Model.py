@@ -77,7 +77,7 @@ class Model:
         self.resetQuery()
         result_set = self.__cursor.fetchall()
         self.hydrateWithBaseData(result_set)
-        if(self.__first):
+        if(self.__first and self.attributes):
             return self.attributes[0]
         return self.attributes
     
