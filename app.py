@@ -77,9 +77,19 @@ def createTask():
 def storeTask():
     return TasksController().store()
 
+@app.route("/tasks/edit/<int:id>")
+def editTask(id):
+    return TasksController().edit(id)
+
+@app.route("/tasks/update", methods=['POST'])
+def updateTask():
+    return TasksController().update()
+
 @app.route("/tasks/delete/<int:id>")
 def deleteTask(id):
     return TasksController().delete(id)
+
+
 
 # TAGS__________________________________________________________________________________
 @app.route("/tags")
@@ -87,7 +97,6 @@ def tags():
     if not session_valid():
         return redirect('/login?callback_url=tags')
     return TagsController().index()
-
 
 @app.route("/tags/create")
 def createTag():

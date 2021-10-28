@@ -26,6 +26,22 @@ class TasksController(Controller):
 
         return self._redirect('/tasks')
     
+    def edit(self, id):
+        task = self._tasks.find(id)
+        return self._render_template("tasks/edit.html", task = task)
+    
+    def update(self):
+        attributes = {
+            'id': self._request.form['id'],
+            'name': self._request.form['name'],
+            'description': self._request.form['description'],
+        }
+        if not self._tasks.update(attributes)['id']:
+            self._flash('Failed to edit!')
+            self._redirect('/tasks/edit/{}'.format(self._request.form['id']))
+
+        return self._redirect('/tasks')
+    
     def delete(self, id):
         self._tasks.delete(id)
         return self._redirect('/tasks')
