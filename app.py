@@ -99,6 +99,14 @@ def createTag():
 def storeTag():
     return TagsController().store()
 
+@app.route("/tags/edit/<int:id>")
+def editTag(id):
+    return TagsController().edit(id)
+
+@app.route("/tags/update", methods=['POST'])
+def updateTag():
+    return TagsController().update()
+
 @app.route("/tags/delete/<int:id>")
 def deleteTag(id):
     return TagsController().delete(id)

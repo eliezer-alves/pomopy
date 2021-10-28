@@ -25,6 +25,24 @@ class TagsController(Controller):
 
         return self._redirect('/tags')
     
+    def edit(self, id):
+        tag = self._tags.find(id)
+        return self._render_template("tags/edit.html", tag = tag)
+    
+    def update(self):
+        attributes = {
+            'id': self._request.form['id'],
+            'name': self._request.form['name'],
+            'color': self._request.form['color'],
+        }
+        # if not self._tags.update(attributes)['id']:
+        #     self._flash('Failed to edit!')
+        #     self._redirect('/tags/create')
+        self._tags.update(attributes)
+        print(self._tags)
+
+        return self._redirect('/tags')
+    
     def delete(self, id):
         self._tags.delete(id)
         return self._redirect('/tags')
