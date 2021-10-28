@@ -9,7 +9,7 @@ class LoginController(Controller):
 
     def create(self):
         callback_url = self._request.args.get('callback_url') or ""
-        return self._render_template("login.html", callback_url=callback_url)
+        return self._render_template("auth/login.html", callback_url=callback_url)
     
     def autenticate(self):
         username = self._request.form['username']

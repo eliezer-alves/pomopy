@@ -9,7 +9,7 @@ class RegisterController(Controller):
         self._users = Users()
 
     def create(self):
-        return self._render_template("register.html")
+        return self._render_template("users/register.html")
     
     def store(self):
         if self.existsUsername(self._request.form['username']):

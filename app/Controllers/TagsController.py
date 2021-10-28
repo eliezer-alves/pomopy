@@ -9,10 +9,10 @@ class TagsController(Controller):
 
     def index(self):
         tags = self.tags.all()
-        return self._render_template("tags.html", tags = tags)
+        return self._render_template("tags/index.html", tags = tags)
 
     def create(self):
-        return self._render_template("create-tag.html")
+        return self._render_template("tags/create.html")
 
     def store(self):
         attributes = {

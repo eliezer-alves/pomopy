@@ -9,10 +9,10 @@ class TasksController(Controller):
 
     def index(self):
         tasks = self._tasks.select().where('users_id', 1).get()
-        return self._render_template("tasks.html", tasks = tasks)
+        return self._render_template("tasks/index.html", tasks = tasks)
 
     def create(self):
-        return self._render_template("create-task.html")
+        return self._render_template("tasks/create.html")
 
     def store(self):
         attributes = {
