@@ -1,4 +1,6 @@
 from .Model import Model
 from .Users import Users
-from .Tasks import Tasks
 from .Tags import Tags
+from .Tasks import Tasks
+from .Guilds import Guilds
+from .Achievements import Achievements

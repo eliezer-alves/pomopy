@@ -5,3 +5,4 @@ from .Controller import Controller
 from .DashboardController import DashboardController
 from .TasksController import TasksController
 from .TagsController import TagsController
+from .GuildsController import GuildsController

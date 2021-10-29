@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, flash
 
-from app.Controllers import LoginController, RegisterController, DashboardController, TasksController, TagsController
+from app.Controllers import LoginController, RegisterController, DashboardController, TasksController, TagsController, GuildsController
 
 app = Flask(__name__)
 app.secret_key = 'LP2'
@@ -119,6 +119,36 @@ def updateTag():
 @app.route("/tags/delete/<int:id>")
 def deleteTag(id):
     return TagsController().delete(id)
+
+
+# TAGS__________________________________________________________________________________
+@app.route("/guilds")
+def guilds():
+    if not session_valid():
+        return redirect('/login?callback_url=guilds')
+    return GuildsController().index()
+
+@app.route("/guilds/create")
+def createGuild():
+    if not session_valid():
+        return redirect('/login?callback_url=guilds')
+    return GuildsController().create()
+
+@app.route("/guilds/store", methods=['POST'])
+def storeGuild():
+    return GuildsController().store()
+
+@app.route("/guilds/edit/<int:id>")
+def editGuild(id):
+    return GuildsController().edit(id)
+
+@app.route("/guilds/update", methods=['POST'])
+def updateGuild():
+    return GuildsController().update()
+
+@app.route("/guilds/delete/<int:id>")
+def deleteGuild(id):
+    return GuildsController().delete(id)
 
 
 if __name__ == '__main__':
