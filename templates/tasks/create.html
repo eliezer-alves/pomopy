@@ -15,8 +15,8 @@
   <span class="font-bold text-2xl">Create a new task</span>
   <form method="POST" action="{{ url_for('storeTask') }}" class="space-y-4">
     <div class="grid grid-cols-1 gap-4">
-      <input class="input-pomo-1" type="text" name="name" placeholder="Name task" required>
-      <textarea class="input-pomo-1" name="description" cols="30" rows="6" placeholder="Description task..."></textarea>
+      <input class="input-pomo-1" type="text" name="name" placeholder="Task name" required>
+      <textarea class="input-pomo-1" name="description" cols="30" rows="6" placeholder="Task description..."></textarea>
     </div>
     <button class="btn-pomo-1-w-full" type="submit">Create Task</button>
   </form>

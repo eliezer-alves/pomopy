@@ -15,9 +15,9 @@
   <span class="font-bold text-2xl">Edit task</span>
   <form method="POST" action="{{ url_for('updateTask') }}" class="space-y-4">
     <div class="grid grid-cols-1 gap-4">
-      <input class="input-pomo-1" type="text" name="id" placeholder="Id task" value="{{ task.id }}" required hidden readonly>
-      <input class="input-pomo-1" type="text" name="name" placeholder="Name task" value="{{ task.name }}" required>
-      <textarea class="input-pomo-1" name="description" cols="30" rows="6" placeholder="Description task...">{{ task.description }}</textarea>
+      <input class="input-pomo-1" type="text" name="id" placeholder="Task id" value="{{ task.id }}" required hidden readonly>
+      <input class="input-pomo-1" type="text" name="name" placeholder="Task name" value="{{ task.name }}" required>
+      <textarea class="input-pomo-1" name="description" cols="30" rows="6" placeholder="Task description...">{{ task.description }}</textarea>
     </div>
     <button class="btn-pomo-1-w-full" type="submit">Save</button>
   </form>
