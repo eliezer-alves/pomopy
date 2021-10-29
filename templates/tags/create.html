@@ -15,8 +15,8 @@
   <span class="font-bold text-2xl">Create a new Tag</span>
   <form method="POST" action="{{ url_for('storeTag') }}" class="space-y-4">
     <div class="grid grid-cols-1 gap-4">
-      <input class="input-pomo-1" type="text" name="name" placeholder="Name tag" required>
-      <input class="input-pomo-1" type="text" name="color" placeholder="Color task in hexdecimal: #fff" required>
+      <input class="input-pomo-1" type="text" name="name" placeholder="Tag name" required>
+      <input class="input-pomo-1" type="text" name="color" placeholder="Tag color in hexdecimal: #fff" required>
     </div>
     <button class="btn-pomo-1-w-full" type="submit">Create Tag</button>
   </form>

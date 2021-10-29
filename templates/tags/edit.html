@@ -15,9 +15,9 @@
   <span class="font-bold text-2xl">Edit Tag</span>
   <form method="POST" action="{{ url_for('updateTag') }}" class="space-y-4">
     <div class="grid grid-cols-1 gap-4">
-      <input class="input-pomo-1" type="text" name="id" placeholder="Id tag" value="{{ tag.id }}" required hidden readonly>
-      <input class="input-pomo-1" type="text" name="name" placeholder="Name tag" value="{{ tag.name }}" required>
-      <input class="input-pomo-1" type="text" name="color" placeholder="Color task in hexdecimal: #fff" value="{{ tag.color }}" required>
+      <input class="input-pomo-1" type="text" name="id" placeholder="Tag id" value="{{ tag.id }}" required hidden readonly>
+      <input class="input-pomo-1" type="text" name="name" placeholder="Tag name" value="{{ tag.name }}" required>
+      <input class="input-pomo-1" type="text" name="color" placeholder="Tag color in hexdecimal: #fff" value="{{ tag.color }}" required>
     </div>
     <button class="btn-pomo-1-w-full" type="submit">Save</button>
   </form>
