@@ -16,3 +16,25 @@
 .btn-pomo-1-circle{
     @apply focus:outline-none text-white text-sm py-2.5 px-5 rounded-full bg-purple-500 hover:bg-purple-600 hover:shadow-lg flex items-center justify-center
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px white; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #aaa; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b30000; 
+  }
