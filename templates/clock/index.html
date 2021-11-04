@@ -1,45 +1,39 @@
-{% extends "template.html" %}
-{% block view %}
+<div class="grid grid-cols-1 gap-2 place-items-center" id="app">
+    <div class="grid grid-cols-1 place-items-center">
+        <div class="my-5">
+            <section class="mb-5 flex justify-center content-center text-2xl">
+                <h5 v-if="!expired">Foco na Missão!</h5>
+                <h5 v-else>Inicie um novo ciclo!</h5>
+            </section>
+            <section class="flex justify-center content-center text-8xl">
+                <div class="minutes mx-2 relative">
+                    {{ '{{ displayMinutes }}' }}
+                    <div class="label text-sm botton-0">Minutos</div>
+                </div>
+                <span class="text-7xl mt-2">:</span>
+                <div class="seconds mx-2 relative">
+                    {{ '{{ displaySeconds }}' }}
+                    <div class="label text-sm botton-0">Segundos</div>
+                </div>
+            </section>
+        </div>
+        <div class="my-5 w-full">
+            <section>
+                <aside class="mb-2 flex justify-between">
+                    <button v-on:click="incremmentInterval()" :disabled="!enableButtonIncrementInterval"
+                        type="button"
+                        class="w-full mr-1 focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg">+</button>
 
-<div class="grid grid-cols-1 space-y-4 w-full">
+                    <button v-on:click="decreaseInterval()" :disbled="!enableButtonDecreaseInterval" type="button"
+                        class="w-full ml-1 focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg">-</button>
+                </aside>
 
-    <div class="grid grid-cols-1 gap-2 place-items-center" id="app">
-        <div class="grid grid-cols-1 place-items-center">
-            <div class="my-5">
-                <section class="mb-5 flex justify-center content-center text-2xl">
-                    <h5 v-if="!expired">Foco na Missão!</h5>
-                    <h5 v-else>Inicie um novo ciclo!</h5>
-                </section>
-                <section class="flex justify-center content-center text-8xl">
-                    <div class="minutes mx-2 relative">
-                        {{ '{{ displayMinutes }}' }}
-                        <div class="label text-sm botton-0">Minutos</div>
-                    </div>
-                    <span class="text-7xl mt-2">:</span>
-                    <div class="seconds mx-2 relative">
-                        {{ '{{ displaySeconds }}' }}
-                        <div class="label text-sm botton-0">Segundos</div>
-                    </div>
-                </section>
-            </div>
-            <div class="my-5 w-full">
-                <section>
-                    <aside class="mb-2 flex justify-between">
-                        <button v-on:click="incremmentInterval()" :disabled="!enableButtonIncrementInterval"
-                            type="button"
-                            class="w-full mr-1 focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg">+</button>
+                <button v-if="!running" v-on:click="start()" type="button"
+                    class="w-full focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg">Iniciar</button>
 
-                        <button v-on:click="decreaseInterval()" :disbled="!enableButtonDecreaseInterval" type="button"
-                            class="w-full ml-1 focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg">-</button>
-                    </aside>
-
-                    <button v-if="!running" v-on:click="start()" type="button"
-                        class="w-full focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg">Iniciar</button>
-
-                    <button v-else v-on:click="exit()" type="button"
-                        class="w-full focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg">Desistir</button>
-                </section>
-            </div>
+                <button v-else v-on:click="exit()" type="button"
+                    class="w-full focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg">Desistir</button>
+            </section>
         </div>
     </div>
 </div>
@@ -136,5 +130,3 @@
 
     });
 </script>
-
-{% endblock %}
