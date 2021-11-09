@@ -35,7 +35,7 @@ class RegisterController(Controller):
         return self._redirect('/login')
     
     def existsUsername(self, username):
-        user = self._users.select().where('username', username).first().get()
+        user = self._users.select().where('username', username).first()
         if 'id' in user:
             return True
         

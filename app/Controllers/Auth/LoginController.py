@@ -15,7 +15,7 @@ class LoginController(Controller):
         username = self._request.form['username']
         password = self._request.form['password']
 
-        authUser = self._users.select().where('username', username).andWhere('password', password).first().get()
+        authUser = self._users.select().where('username', username).andWhere('password', password).first()
         
         if 'id' in authUser:
             self._session['user'] = authUser

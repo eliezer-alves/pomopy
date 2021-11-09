@@ -7,7 +7,6 @@ class Model:
     def __init__(self) -> None:
         self.__db = MySQLdb.connect(host="127.0.0.1", user="root", passwd="admin", db="pomopy", port=3306, charset='utf8')
         self.__cursor = self.__db.cursor()
-        self.__first = False
         self.query = ''
         self.lastExecutedQuery = ''
         self.table = ''
@@ -84,8 +83,6 @@ class Model:
         self.resetQuery()
         result_set = self.__cursor.fetchall()
         self.hydrateWithBaseData(result_set)
-        if(self.__first and self.attributes):
-            return self.attributes[0]
         return self.attributes
     
     def find(self, id):
@@ -93,8 +90,13 @@ class Model:
         return self.select().where(self.primaryKey, id).get()
     
     def first(self):
-        self.__first = True
-        return self
+        if(self.query == ''):
+            self.select()    
+        self.__cursor.execute(self.query)
+        self.resetQuery()
+        result_set = self.__cursor.fetchall()
+        self.hydrateWithBaseData(result_set)
+        return self.attributes[0]
     
     def all(self):
         self.select()
