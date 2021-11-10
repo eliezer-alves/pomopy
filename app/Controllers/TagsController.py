@@ -1,5 +1,5 @@
 from app.Controllers import Controller
-from app.Models import Tags
+from app.Models import Tags, Colors
 
 
 class TagsController(Controller):
@@ -13,7 +13,8 @@ class TagsController(Controller):
         return self._render_template("tags/index.html", tags = tags)
 
     def create(self):
-        return self._render_template("tags/create.html")
+        colors = Colors().all()
+        return self._render_template("tags/create.html", colors = colors)
 
     def store(self):
         attributes = {

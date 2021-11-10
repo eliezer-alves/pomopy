@@ -16,7 +16,12 @@
   <form method="POST" action="{{ url_for('storeTag') }}" class="space-y-4">
     <div class="grid grid-cols-1 gap-4">
       <input class="input-pomo-1" type="text" name="name" placeholder="Tag name" required>
-      <input class="input-pomo-1" type="text" name="color" placeholder="Tag color in hexdecimal: #fff" required>
+      <!-- <input class="input-pomo-1" type="text" name="color" placeholder="Tag color in hexdecimal: #fff" required> -->
+      <select name="color" class="input-pomo-1">
+        {% for color in colors %}
+          <option value="{{ color.hexadecimal }}" style="background-color:{{ color.hexadecimal }};">{{ color.name }}</option>
+        {% endfor %}
+      </select>
     </div>
     <button class="btn-pomo-1-w-full" type="submit">Create Tag</button>
   </form>
