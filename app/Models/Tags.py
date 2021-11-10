@@ -7,4 +7,5 @@ class Tags(Model):
         self.fillable = [
             'name',
             'color',
+            'users_id',
         ]

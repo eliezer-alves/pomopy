@@ -8,7 +8,8 @@ class TagsController(Controller):
         self._tags = Tags()
 
     def index(self):
-        tags = self._tags.all()
+        userId = self._session['user']['id']
+        tags = self._tags.select().where('users_id', userId).get()
         return self._render_template("tags/index.html", tags = tags)
 
     def create(self):
@@ -18,6 +19,7 @@ class TagsController(Controller):
         attributes = {
             'name': self._request.form['name'],
             'color': self._request.form['color'],
+            'users_id': self._session['user']['id'],
         }
         if not self._tags.create(attributes)['id']:
             self._flash('Failed to register!')
