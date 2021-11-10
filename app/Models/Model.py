@@ -86,8 +86,7 @@ class Model:
         return self.attributes
     
     def find(self, id):
-        self.first()
-        return self.select().where(self.primaryKey, id).get()
+        return self.select().where(self.primaryKey, id).first()
     
     def first(self):
         if(self.query == ''):
@@ -96,7 +95,10 @@ class Model:
         self.resetQuery()
         result_set = self.__cursor.fetchall()
         self.hydrateWithBaseData(result_set)
-        return self.attributes[0]
+        try:
+            return self.attributes[0]
+        except:
+            return []
     
     def all(self):
         self.select()
