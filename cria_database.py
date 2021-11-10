@@ -200,6 +200,26 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 '''
 
+popular_colors = '''
+
+INSERT INTO `pomopy`.`colors` (hexadecimal, name) VALUES
+('#C0C0C0', 'Silver'),
+('#836FFF', 'SlateBlue'),
+('#00BFFF', 'DeepSkyBlue'),
+('#4682B4', 'SteelBlue'),
+('#48D1CC', 'MediumTurquoise'),
+('#00FA9A', 'MediumSpringGreen'),
+('#3CB371', 'MediumSeaGreen'),
+('#EE82EE', 'Violet'),
+('#FF69B4', 'HotPink'),
+('#FFC0CB', 'Pink'),
+('#FA8072', 'Salmon'),
+('#F4FA58', 'Yellow'),
+('#FE9A2E', 'Orange')
+
+'''
+
 conn.cursor().execute(criar_tabelas)
+conn.cursor().execute(popular_colors)
 conn.commit()
 conn.cursor.close()
