@@ -19,7 +19,6 @@ class LoginController(Controller):
         
         if 'id' in authUser:
             self._session['user'] = authUser
-            self._flash(self._request.form['username'] + ' logou com sucesso!')
             next_page = self._request.form['callback_url']
             return self._redirect("/{}".format(next_page))
     
