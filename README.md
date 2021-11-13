@@ -13,4 +13,7 @@ Vale a pena dar uma conferida :smile:
 
 
 # Anotações
-* npx tailwindcss-cli@latest build ./src/style.css -o css/main.css   
+* npx tailwindcss-cli@latest build ./src/style.css -o css/main.css 
+
+# Telas
+![image](https://user-images.githubusercontent.com/23661672/141601194-568afbab-972a-4266-b5e3-bede3ac55dd2.png)
