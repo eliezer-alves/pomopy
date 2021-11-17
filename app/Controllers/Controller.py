@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, session, flash, jsonify
+from datetime import datetime
 
 class Controller:
     def __init__(self) -> None:
@@ -8,3 +9,4 @@ class Controller:
         self._session = session
         self._flash = flash
         self._jsonify = jsonify
+        self.datetime = datetime

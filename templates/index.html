@@ -50,7 +50,7 @@
         el: '#app',
         props: ["minute"],
         data: () => ({
-            intervalArray: [15, 25, 30, 40],
+            intervalArray: [1, 15, 25, 30, 40],
             currentInterval: 0,
             displayMinutes: '00',
             displaySeconds: '00',
@@ -78,8 +78,8 @@
                 baseUrl = window.location.protocol + "//" + window.location.host;
                 parms = {
                     duration_in_minutes: this.currentIntervalValue(),
-                    tags_id: 12,
-                    tasks_id: 2,
+                    tags_id: 1,
+                    tasks_id: 1,
                 }
                 console.log(parms)
                 axios.post(baseUrl + '/cycles/store', parms)

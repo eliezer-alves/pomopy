@@ -10,4 +10,6 @@ class Cycles(Model):
             'tags_id',
             'tasks_id',
             'users_id',
+            'start',
+            'end',
         ]
