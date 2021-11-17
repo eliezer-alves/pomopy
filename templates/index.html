@@ -74,6 +74,22 @@
             currentIntervalValue() {
                 return this.intervalArray[this.currentInterval];
             },
+            createNewCycle() {
+                baseUrl = window.location.protocol + "//" + window.location.host;
+                parms = {
+                    duration_in_minutes: this.currentIntervalValue(),
+                    tags_id: 12,
+                    tasks_id: 2,
+                }
+                console.log(parms)
+                axios.post(baseUrl + '/cycles/store', parms)
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
             initialDisplayMode() {
                 this.displayMinutes = this.formatNum(this.currentIntervalValue())
                 this.displaySeconds = "00"
@@ -101,6 +117,7 @@
                 console.log(this.currentIntervalValue())
             },
             start() {
+                this.createNewCycle()
                 this.initialDisplayMode()
                 this.end = new Date().setMinutes(new Date().getMinutes() + this.currentIntervalValue())
                 this.clockRunning()

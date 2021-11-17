@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, flash
 
-from app.Controllers import LoginController, RegisterController, DashboardController, TasksController, TagsController, GuildsController
+from app.Controllers import LoginController, RegisterController, DashboardController, TasksController, TagsController, GuildsController, CyclesController
 
 app = Flask(__name__)
 app.secret_key = 'LP2'
@@ -150,6 +150,10 @@ def updateGuild():
 def deleteGuild(id):
     return GuildsController().delete(id)
 
+# Cycles__________________________________________________________________________________
+@app.route("/cycles/store", methods=['POST'])
+def storeCycle():
+    return CyclesController().store()
 
 if __name__ == '__main__':
 	app.run(debug=True)

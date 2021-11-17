@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, flash
+from flask import Flask, render_template, request, redirect, session, flash, jsonify
 
 class Controller:
     def __init__(self) -> None:
@@ -7,3 +7,4 @@ class Controller:
         self._render_template = render_template
         self._session = session
         self._flash = flash
+        self._jsonify = jsonify
