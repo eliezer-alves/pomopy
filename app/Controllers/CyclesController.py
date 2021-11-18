@@ -11,8 +11,6 @@ class CyclesController(Controller):
         return
 
     def store(self):
-        # return self._jsonify(self._request.json)
-
         attributes = {
             'duration_in_minutes': self._request.json['duration_in_minutes'],
             'status': 0,
@@ -21,13 +19,17 @@ class CyclesController(Controller):
             'users_id': self._session['user']['id'],
             'start': self.datetime.today().strftime('%Y-%m-%d'),
         }
-        # print(attributes)
-        # return self._jsonify(attributes)
 
         return self._jsonify(self._cycles.create(attributes))
     
-    def update(self):
-        return
+    def endCycle(self):
+        attributes = {
+            'id': self._request.json['id'],
+            'status': 1,
+            'end': self.datetime.today().strftime('%Y-%m-%d'),
+        }
+
+        return self._jsonify(self._cycles.update(attributes))
     
     def delete(self, id):
         self._cycles.delete(id)

@@ -50,6 +50,7 @@
         el: '#app',
         props: ["minute"],
         data: () => ({
+            baseUrl: window.location.protocol + "//" + window.location.host,
             intervalArray: [1, 15, 25, 30, 40],
             currentInterval: 0,
             displayMinutes: '00',
@@ -58,7 +59,8 @@
             enableButtonDecreaseInterval: true,
             expired: false,
             running: false,
-            end: 0
+            end: 0,
+            idCycle: null,
         }),
         computed: {
             _seconds: () => 1000,
@@ -74,17 +76,36 @@
             currentIntervalValue() {
                 return this.intervalArray[this.currentInterval];
             },
-            createNewCycle() {
-                baseUrl = window.location.protocol + "//" + window.location.host;
-                parms = {
-                    duration_in_minutes: this.currentIntervalValue(),
-                    tags_id: 1,
-                    tasks_id: 1,
-                }
-                console.log(parms)
-                axios.post(baseUrl + '/cycles/store', parms)
+            async createNewCycle() {
+                this.idCycle = await axios.post(this.baseUrl + '/cycles/store',
+                    {
+                        duration_in_minutes: this.currentIntervalValue(),
+                        tags_id: 1,
+                        tasks_id: 1,
+                    }
+                )
                 .then(function (response) {
                     console.log(response);
+                    return response.data.id
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    return null
+                });
+
+                
+                console.log(this.idCycle)
+            },
+            endCycle() {
+                console.log(this.idCycle);
+                axios.post(this.baseUrl + '/cycles/end',
+                    {
+                        id: this.idCycle
+                    }
+                )
+                .then(function (response) {
+                    console.log(response);
+                    // this.idCycle = null
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -118,6 +139,7 @@
             },
             start() {
                 this.createNewCycle()
+                console.log(this.idCycle);
                 this.initialDisplayMode()
                 this.end = new Date().setMinutes(new Date().getMinutes() + this.currentIntervalValue())
                 this.clockRunning()
@@ -137,6 +159,7 @@
                     if (interval < 0 || !this.running) {
                         clearInterval(timer)
                         this.exit(false)
+                        this.endCycle()
                         return
                     }
 

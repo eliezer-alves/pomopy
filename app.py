@@ -155,5 +155,9 @@ def deleteGuild(id):
 def storeCycle():
     return CyclesController().store()
 
+@app.route("/cycles/end", methods=['POST'])
+def endCycle():
+    return CyclesController().endCycle()
+
 if __name__ == '__main__':
 	app.run(debug=True)
