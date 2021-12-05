@@ -20,5 +20,8 @@ Vale a pena dar uma conferida :smile:
 ## Login
 ![image](https://user-images.githubusercontent.com/23661672/144768281-b07941d9-3731-4feb-8ea7-294c4ba62c1e.png)
 
+## Register
+![image](https://user-images.githubusercontent.com/23661672/144768364-b29023ed-3502-4f2c-aad4-06ee06b5fca8.png)
+
 ## Cronômetro
 ![image](https://user-images.githubusercontent.com/23661672/141601194-568afbab-972a-4266-b5e3-bede3ac55dd2.png)
