@@ -23,5 +23,8 @@ Vale a pena dar uma conferida :smile:
 ## Register
 ![image](https://user-images.githubusercontent.com/23661672/144768364-b29023ed-3502-4f2c-aad4-06ee06b5fca8.png)
 
+## Tasks
+![image](https://user-images.githubusercontent.com/23661672/144768405-8f75a733-8a23-4e60-b978-51989209bbc1.png)
+
 ## Cronômetro
 ![image](https://user-images.githubusercontent.com/23661672/141601194-568afbab-972a-4266-b5e3-bede3ac55dd2.png)
