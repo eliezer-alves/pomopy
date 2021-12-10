@@ -156,6 +156,11 @@ def deleteGuild(id):
 
 
 # Cycles__________________________________________________________________________________
+@app.route("/cycles")
+def cycles():
+    return CyclesController().index()
+
+
 @app.route("/cycles/store", methods=['POST'])
 def storeCycle():
     return CyclesController().store()

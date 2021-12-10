@@ -8,7 +8,9 @@ class CyclesController(Controller):
         self._cycles = Cycles()
 
     def index(self):
-        return
+        userId = self._session['user']['id']
+        cycles = self._cycles.getCyclesFromUser(userId)
+        return self._render_template("cycles/index.html", cycles = cycles)
 
     def store(self):
         attributes = {
