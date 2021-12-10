@@ -49,6 +49,7 @@ def logout():
     return LoginController().destroy()
 
 
+
 # USER___________________________________________________________________________________
 @app.route("/register")
 def register():
@@ -57,6 +58,7 @@ def register():
 @app.route("/user/store", methods=['POST'])
 def storeUser():
     return RegisterController().store()
+
 
 
 # TASKS__________________________________________________________________________________
@@ -91,6 +93,7 @@ def deleteTask(id):
 
 
 
+
 # TAGS__________________________________________________________________________________
 @app.route("/tags")
 def tags():
@@ -121,6 +124,7 @@ def deleteTag(id):
     return TagsController().delete(id)
 
 
+
 # TAGS__________________________________________________________________________________
 @app.route("/guilds")
 def guilds():
@@ -149,6 +153,7 @@ def updateGuild():
 @app.route("/guilds/delete/<int:id>")
 def deleteGuild(id):
     return GuildsController().delete(id)
+
 
 # Cycles__________________________________________________________________________________
 @app.route("/cycles/store", methods=['POST'])
