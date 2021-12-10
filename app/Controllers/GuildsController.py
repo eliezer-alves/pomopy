@@ -8,7 +8,8 @@ class GuildsController(Controller):
         self._guilds = Guilds()
 
     def index(self):
-        guilds = self._guilds.select().where('users_id', 1).get()
+        userId = self._session['user']['id']
+        guilds = self._guilds.select().where('users_id', userId).get()
         return self._render_template("guilds/index.html", guilds = guilds)
 
     def create(self):
