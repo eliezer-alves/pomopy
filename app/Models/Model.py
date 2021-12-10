@@ -78,10 +78,13 @@ class Model:
             self.query += ' AND {}'.format(clause)        
         return self
     
-    def get(self):
+    def execute(self):
         self.__cursor.execute(self.query)
         self.resetQuery()
-        result_set = self.__cursor.fetchall()
+        return self.__cursor.fetchall()
+    
+    def get(self):
+        result_set = self.execute()
         self.hydrateWithBaseData(result_set)
         return self.attributes
     
@@ -91,9 +94,7 @@ class Model:
     def first(self):
         if(self.query == ''):
             self.select()    
-        self.__cursor.execute(self.query)
-        self.resetQuery()
-        result_set = self.__cursor.fetchall()
+        result_set = self.execute()
         self.hydrateWithBaseData(result_set)
         try:
             return self.attributes[0]
@@ -102,9 +103,7 @@ class Model:
     
     def all(self):
         self.select()
-        self.__cursor.execute(self.query)
-        self.resetQuery()
-        result_set = self.__cursor.fetchall()
+        result_set = self.execute()
         self.hydrateWithBaseData(result_set)
         return self.attributes
 
