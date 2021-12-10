@@ -10,3 +10,6 @@ class Controller:
         self._flash = flash
         self._jsonify = jsonify
         self.datetime = datetime
+    
+    def user(self):
+        return self._session['user']
