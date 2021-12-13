@@ -43,13 +43,14 @@
         <div>
             <aside class="mt-4 flex flex-col bg-purple-500 p-8 rounded-md shadow-xl">
                 <label for="" class="text-lg font-bold text-white">Tag</label>
-                <select class="input-pomo-1 my-1 mb-8">
+                <select @change="handleTag($event)" class="input-pomo-1 my-1 mb-8">
                 {% for tag in tags %}
                     <option value="{{ tag.id }}" style="background-color:{{ tag.color }};">{{ tag.name }}</option>
                 {% endfor %}
                 </select>
                 <label for="" class="text-lg font-bold text-white">Task</label>
-                <select class="input-pomo-1 my-1">
+                <select @change="handleTask($event)" class="input-pomo-1 my-1">
+                    <option value="">-</option> 
                 {% for task in tasks %}
                     <option value="{{ task.id }}">{{ task.name }}</option>
                 {% endfor %}
@@ -91,12 +92,20 @@
             currentIntervalValue() {
                 return this.intervalArray[this.currentInterval];
             },
+            handleTag(event) {
+                this.selectedTag = event.target.value
+            },
+            handleTask(event) {
+                this.selectedTask = event.target.value
+            },
             async createNewCycle() {
+                console.log(this.selectedTag);
+                console.log(this.selectedTask);
                 this.idCycle = await axios.post(this.baseUrl + '/cycles/store',
                     {
                         duration_in_minutes: this.currentIntervalValue(),
-                        tags_id: 1,
-                        tasks_id: 1,
+                        tags_id: this.selectedTag,
+                        tasks_id: this.selectedTask,
                     }
                 )
                 .then(function (response) {
@@ -107,9 +116,6 @@
                     console.log(error);
                     return null
                 });
-
-                
-                console.log(this.idCycle)
             },
             endCycle() {
                 console.log(this.idCycle);
