@@ -27,7 +27,9 @@ class Cycles(Model):
         ]
     
     def getCyclesFromUser(self, userId):
-        cycles = self.select().where('users_id', userId).get()
+        cycles = self.select().where('users_id', userId)
+        cycles.query = cycles.query + " order by id desc"
+        cycles = cycles.get()
         returCycles = []
         for cycle in cycles:
             tag = self.tags.find(cycle['tags_id'])
