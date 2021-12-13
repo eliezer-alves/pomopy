@@ -19,7 +19,7 @@ class CyclesController(Controller):
             'tags_id': self._request.json['tags_id'],
             'tasks_id': self._request.json['tasks_id'],
             'users_id': self.user()['id'],
-            'start': self.datetime.today().strftime('%Y-%m-%d'),
+            'start': self.datetime.today().strftime('%Y-%m-%d %H:%M:%S'),
         }
 
         return self._jsonify(self._cycles.create(attributes))
