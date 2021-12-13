@@ -4,9 +4,9 @@
 <div class="grid grid-cols-1 space-y-4 w-full">
 
     <div class="grid grid-cols-2 gap-2 py-10 place-items-center" id="app">
-        <div class="grid grid-cols-1 place-items-center p-8 rounded-sm bg-gray-100 shadow">
+        <div class="grid grid-cols-1 place-items-center p-8 rounded-md bg-gray-100 shadow-xl">
             <div class="my-5">
-                <section class="mb-5 flex justify-center content-center text-2xl">
+                <section class="mb-5 flex justify-center content-center text-xl font-bold">
                     <h5 v-if="!expired">Foco na Missão!</h5>
                     <h5 v-else>Iniciar um novo ciclo!</h5>
                 </section>
@@ -41,12 +41,14 @@
             </div>
         </div>
         <div>
-            <aside class="mt-4 flex flex-col bg-gray-400 p-4 rounded-md">
-                <select class="input-pomo-1 my-1">
+            <aside class="mt-4 flex flex-col bg-purple-500 p-8 rounded-md shadow-xl">
+                <label for="" class="text-lg font-bold text-white">Tag</label>
+                <select class="input-pomo-1 my-1 mb-8">
                 {% for tag in tags %}
                     <option value="{{ tag.id }}" style="background-color:{{ tag.color }};">{{ tag.name }}</option>
                 {% endfor %}
                 </select>
+                <label for="" class="text-lg font-bold text-white">Task</label>
                 <select class="input-pomo-1 my-1">
                 {% for task in tasks %}
                     <option value="{{ task.id }}">{{ task.name }}</option>
