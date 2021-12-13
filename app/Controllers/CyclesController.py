@@ -8,7 +8,7 @@ class CyclesController(Controller):
         self._cycles = Cycles()
 
     def index(self):
-        userId = self._session['user']['id']
+        userId = self.user()['id']
         cycles = self._cycles.getCyclesFromUser(userId)
         return self._render_template("cycles/index.html", cycles = cycles)
 
@@ -18,7 +18,7 @@ class CyclesController(Controller):
             'status': 0,
             'tags_id': self._request.json['tags_id'],
             'tasks_id': self._request.json['tasks_id'],
-            'users_id': self._session['user']['id'],
+            'users_id': self.user()['id'],
             'start': self.datetime.today().strftime('%Y-%m-%d'),
         }
 

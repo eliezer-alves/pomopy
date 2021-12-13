@@ -8,7 +8,7 @@ class TasksController(Controller):
         self._tasks = Tasks()
 
     def index(self):
-        userId = self._session['user']['id']
+        userId = self.user()['id']
         tasks = self._tasks.select().where('users_id', userId).get()
         return self._render_template("tasks/index.html", tasks = tasks)
 
@@ -19,7 +19,7 @@ class TasksController(Controller):
         attributes = {
             'name': self._request.form['name'],
             'description': self._request.form['description'],
-            'users_id': self._session['user']['id'],
+            'users_id': self.user()['id'],
         }
         if not self._tasks.create(attributes)['id']:
             self._flash('Failed to register!')
