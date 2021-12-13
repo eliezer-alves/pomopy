@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, flash
 
-from app.Controllers import LoginController, RegisterController, DashboardController, TasksController, TagsController, GuildsController, CyclesController
+from app.Controllers import LoginController, RegisterController, DashboardController, TasksController, TagsController, GuildsController, CyclesController, ColorsController
 
 app = Flask(__name__)
 app.secret_key = 'LP2'
@@ -125,6 +125,39 @@ def deleteTag(id):
 
 
 
+
+# COLORS__________________________________________________________________________________
+@app.route("/colors")
+def colors():
+    if not session_valid():
+        return redirect('/login?callback_url=colors')
+    return ColorsController().index()
+
+@app.route("/colors/create")
+def createColor():
+    if not session_valid():
+        return redirect('/login?callback_url=colors')
+    return ColorsController().create()
+
+@app.route("/colors/store", methods=['POST'])
+def storeColor():
+    return ColorsController().store()
+
+@app.route("/colors/edit/<int:id>")
+def editColor(id):
+    return ColorsController().edit(id)
+
+@app.route("/colors/update", methods=['POST'])
+def updateColor():
+    return ColorsController().update()
+
+@app.route("/colors/delete/<int:id>")
+def deleteColor(id):
+    return ColorsController().delete(id)
+
+
+
+
 # TAGS__________________________________________________________________________________
 @app.route("/guilds")
 def guilds():
@@ -153,6 +186,9 @@ def updateGuild():
 @app.route("/guilds/delete/<int:id>")
 def deleteGuild(id):
     return GuildsController().delete(id)
+
+
+
 
 
 # Cycles__________________________________________________________________________________

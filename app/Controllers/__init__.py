@@ -7,3 +7,4 @@ from .TasksController import TasksController
 from .TagsController import TagsController
 from .GuildsController import GuildsController
 from .CyclesController import CyclesController
+from .ColorsController import ColorsController
