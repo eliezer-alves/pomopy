@@ -219,7 +219,6 @@ INSERT INTO `pomopy`.`colors` (hexadecimal, name) VALUES
 ('#FE9A2E', 'Orange')
 
 '''
-
 conn.cursor().execute(criar_tabelas)
 conn.cursor().execute(popular_colors)
 conn.commit()
