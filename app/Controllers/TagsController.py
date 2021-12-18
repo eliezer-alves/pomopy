@@ -1,7 +1,6 @@
 from app.Controllers import Controller
 from app.Models import Tags, Colors
 
-
 class TagsController(Controller):
     def __init__(self) -> None:
         super().__init__()
