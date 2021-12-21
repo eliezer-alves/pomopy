@@ -31,3 +31,7 @@ Vale a pena dar uma conferida :smile:
 
 ## Cronômetro
 ![image](https://user-images.githubusercontent.com/23661672/141601194-568afbab-972a-4266-b5e3-bede3ac55dd2.png)
+
+## Colors
+![image](https://user-images.githubusercontent.com/23661672/146852514-7f479234-7cf4-4638-ad07-ea3f564da88f.png)
+
